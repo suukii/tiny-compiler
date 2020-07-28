@@ -1,11 +1,11 @@
-import { emitNumber, emitString, emitExpression, emitter } from '../src/index'
+import { emitter } from '../src/index'
 
 test('It should handle NumberLiteral.', () => {
     const node = {
         type: 'NumberLiteral',
         value: '1',
     }
-    expect(emitNumber(node)).toBe('1')
+    expect(emitter(node)).toBe('1')
 })
 
 test('It should handle StringLiteral.', () => {
@@ -13,7 +13,7 @@ test('It should handle StringLiteral.', () => {
         type: 'StringLiteral',
         value: 'hello world',
     }
-    expect(emitString(node)).toBe(`"hello world"`)
+    expect(emitter(node)).toBe(`"hello world"`)
 })
 
 test('It should handle Program.', () => {
@@ -79,5 +79,23 @@ test('It should handle CallExpression.', () => {
             },
         ],
     }
-    expect(emitExpression(node)).toBe('add(1, 2)')
+    expect(emitter(node)).toBe('add(1, 2)')
+})
+
+test('It should throw error if met with unexpected type of ast node.', () => {
+    const node = {
+        type: 'JustKidding',
+        name: 'add',
+        params: [
+            {
+                type: 'NumberLiteral',
+                value: '1',
+            },
+            {
+                type: 'NumberLiteral',
+                value: '2',
+            },
+        ],
+    }
+    expect(() => emitter(node)).toThrowError('JustKidding')
 })
