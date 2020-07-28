@@ -9,7 +9,7 @@ import {
 } from '../src/index'
 
 describe('Tokenize Single Character', () => {
-    test('open paren', () => {
+    test('It can tokenize open parenthese.', () => {
         expect(tokenizeParenOpen('(', 0)).toEqual([
             1,
             { type: 'paren', value: '(' },
@@ -17,7 +17,7 @@ describe('Tokenize Single Character', () => {
         expect(tokenizeParenOpen(')', 0)).toEqual([0, null])
         expect(tokenizeParenOpen('', 0)).toEqual([0, null])
     })
-    test('close paren', () => {
+    test('It can tokenize close parenthese.', () => {
         expect(tokenizeParenClose(')', 0)).toEqual([
             1,
             { type: 'paren', value: ')' },
@@ -28,7 +28,7 @@ describe('Tokenize Single Character', () => {
 })
 
 describe('Tokenize Multiple Characters', () => {
-    test('number', () => {
+    test('It can tokenize numbers correctly.', () => {
         expect(tokenizeNumber('123abc', 0)).toEqual([
             3,
             {
@@ -54,7 +54,7 @@ describe('Tokenize Multiple Characters', () => {
         expect(tokenizeNumber('', 0)).toEqual([0, null])
     })
 
-    test('name', () => {
+    test('It can tokenize identifiers correctly', () => {
         expect(tokenizeName('suukii', 0)).toEqual([
             6,
             {
@@ -81,22 +81,24 @@ describe('Tokenize Multiple Characters', () => {
     })
 })
 
-describe('String', () => {
-    test('string', () => {
+describe('Tokenize String', () => {
+    test('It can tokenize string correctly.', () => {
         expect(tokenizeString('"hello world"', 0)).toEqual([
-            11,
+            13,
             {
                 type: 'string',
                 value: 'hello world',
             },
         ])
         expect(tokenizeString('hello world', 0)).toEqual([0, null])
-        expect(tokenizeString('"hello world', 0)).toThrow()
+        expect(() => tokenizeString('"hello world', 0)).toThrowError(
+            'invalid string terminator',
+        )
     })
 })
 
-describe('White Space', () => {
-    test('skip white spaces', () => {
+describe('Tokenize White Space', () => {
+    test('White spaces will be skipped.', () => {
         expect(skipWhiteSpace(' ', 0)).toEqual([1, null])
         expect(skipWhiteSpace('', 0)).toEqual([0, null])
         expect(skipWhiteSpace(' abc', 0)).toEqual([1, null])
@@ -105,7 +107,7 @@ describe('White Space', () => {
 })
 
 describe('Tokenizer', () => {
-    test('tokenize', () => {
+    test('It can tokenize identifiers, number, parenthese, and white spaces.', () => {
         const code = 'add 1 (add 2 3)'
         const tokens = [
             { type: 'name', value: 'add' },
@@ -117,5 +119,21 @@ describe('Tokenizer', () => {
             { type: 'paren', value: ')' },
         ]
         expect(tokenizer(code)).toEqual(tokens)
+    })
+    test('Uncorrectly closed parenthese will be tokenized too.', () => {
+        const code = '(hello) (yoyo'
+        const tokens = [
+            { type: 'paren', value: '(' },
+            { type: 'name', value: 'hello' },
+            { type: 'paren', value: ')' },
+            { type: 'paren', value: '(' },
+            { type: 'name', value: 'yoyo' },
+        ]
+        expect(tokenizer(code)).toEqual(tokens)
+    })
+    test('It can not tokenize [.', () => {
+        expect(() => tokenizer('yoyo[1]')).toThrowError(
+            `I can't figure out this charater: [`,
+        )
     })
 })
