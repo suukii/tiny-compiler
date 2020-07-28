@@ -1,4 +1,10 @@
-# 写一个超迷你的编译器 - #1 词法分析器 tokenizer
+# Build Your Own Tiny Compiler - #1 词法分析器 tokenizer
+
+在编译过程中，parsing 一般分为两个阶段：词法分析(Lexical Analysis)、语法分析(Syntactic Analysis)。
+
+1. 词法分析：将源码字符串拆成一系列 token，负责这个工作的机器叫做 `词法分析器`(`tokenizer`, `lexer`)，也就是我们上一节中完成的任务。
+
+2. 语法分析：负责将 token 按照一定规则重新组合，转换成另一种抽象的形式，比如 AST(抽象语法树)，用来表示 token 之间的关系，一般负责这个工作的程序就做 `语法分析器`(`parser`)。
 
 在这一节我们要写一个超迷你的词法分析器，这个词法分析器的任务就是：将输入的 `代码字符串` 转换成一系列 `token` 之后输出。它只要处理 3 种简单的 token 就行:
 
@@ -27,7 +33,7 @@ token 的类型包括：
 -   `number`: 数字，`[0-9]`。
 -   `name`: 标识符，只能使用 `[a-zA-Z]` 字符。
 
-**我们的任务是，阅读以下内容，并实现 `src/index.ts` 中定义的所有函数，通过 `npm test` 来测试你的代码。**
+**我们的任务是，阅读以下内容，并实现 `src/index.ts` 中定义的所有函数，然后通过 `npm test` 来测试你的代码。**
 
 p.s. 使用 `npm run dev` 会监控 `src/index.ts` 的变化并重新执行该文件。
 
@@ -158,11 +164,11 @@ const tokenizer = input => {
 
 说明：
 
-`tokenizer` 的任务就是接收一个代码字符串 `input`，在 `input` 上尝试所有 token 分析器，如果有 token 生成，就 push 到 tokens 数组中，在 `input` 分析结束后返回。如果试过所有分析器都无法生成合法的 token，那就抛出错误。
+`tokenizer` 的任务就是接收一个代码字符串 `input`，尝试把代码喂给所有 token 分析器，如果有 token 生成，就加入到 tokens 数组中，在分析结束后返回。如果所有分析器都无法基于 `input` 生成合法的 token，那就抛出错误。
 
 ## 小结
 
-好啦，任务就这么多，现在去 `src/index.ts` 文件中完成你的任务吧。
+好了，任务就这么多，现在去 `src/index.ts` 文件中完成你的任务吧。
 
 你可以执行 `npm run dev` 命令，然后在 `src/index.ts` 中使用 `console.log` 来进行调试，或者也可以使用 Quokka.js 之类的。
 
