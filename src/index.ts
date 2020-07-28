@@ -20,12 +20,12 @@ export const emitNumber = (node: LiteralAstNode): string => `${node.value}`
 export const emitString = (node: LiteralAstNode): string => `"${node.value}"`
 
 export const emitExpression = (node: ExpressionAstNode): string => {
-    const params = node.params.map(emitter).join(', ')
-    return `${node.name}(${params})`
+    // code here
 }
 
-export const emitProgram = (node: ProgramAstNode): string =>
-    `${node.body.map((exp: AstNode): string => `${emitter(exp)};`).join('\n')}`
+export const emitProgram = (node: ProgramAstNode): string => {
+    // code here
+}
 
 export const emitter = (node: AstNode): string => {
     switch (node.type) {

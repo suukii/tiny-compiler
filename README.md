@@ -44,7 +44,7 @@ const emitString = (node: LiteralAstNode): string => `"${node.value}"`
 
 ## 任务 5: emitter
 
-`emitter` 的任务就是将以上几个函数统一起来，根据节点类型选择不同的转换函数。
+`emitter` 的任务就是将以上几个函数统一起来，根据节点类型选择不同的转换函数，这个函数也已经完成了。所以，实际上你只需要完成任务 4 和 5 就行。
 
 ##  小结
 
