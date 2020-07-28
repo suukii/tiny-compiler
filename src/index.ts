@@ -56,12 +56,8 @@ export const parseExpression = (
     }
     token = tokens[++current]
 
-    let param: AstNode
-    while (!(token.type === 'paren' && token.value === ')')) {
-        ;[current, param] = parseToken(tokens, current)
-        node.params.push(param)
-        token = tokens[current]
-    }
+    // code here
+
     return [++current, node]
 }
 
@@ -69,20 +65,7 @@ export const parseToken = (
     tokens: Array<Token>,
     current: number,
 ): [number, AstNode] => {
-    let token: Token = tokens[current]
-
-    switch (token.type) {
-        case 'number':
-            return parseNumber(tokens, current)
-        case 'string':
-            return parseString(tokens, current)
-        case 'paren':
-            if (token.value === '(') return parseExpression(tokens, current)
-            throw new TypeError(token.type)
-
-        default:
-            throw new TypeError(token.type)
-    }
+    // code here
 }
 
 const parseProgram = (tokens: Array<Token>): Ast => {
@@ -91,11 +74,7 @@ const parseProgram = (tokens: Array<Token>): Ast => {
         type: 'Program',
         body: [],
     }
-    let node: AstNode
-    while (current < tokens.length) {
-        ;[current, node] = parseToken(tokens, current)
-        ast.body.push(node)
-    }
+    // code here
     return ast
 }
 
