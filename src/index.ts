@@ -15,26 +15,42 @@ const tokenizeCharacter = (
     value: string,
     input: string,
     current: number,
-): Token => {}
+): Token => {
+    return [0, null]
+}
 
-export const tokenizeParenOpen = (input: string, current: number): Token => {}
+export const tokenizeParenOpen = (input: string, current: number): Token => {
+    return [1, { type: 'paren', value: '(' }]
+}
 
-export const tokenizeParenClose = (input: string, current: number): Token => {}
+export const tokenizeParenClose = (input: string, current: number): Token => {
+    return [1, { type: 'paren', value: ')' }]
+}
 
 const tokenizePattern = (
     type: string,
     pattern: RegExp,
     input: string,
     current: number,
-): Token => {}
+): Token => {
+    return [0, null]
+}
 
-export const tokenizeNumber = (input: string, current: number): Token => {}
+export const tokenizeNumber = (input: string, current: number): Token => {
+    return [0, null]
+}
 
-export const tokenizeName = (input: string, current: number): Token => {}
+export const tokenizeName = (input: string, current: number): Token => {
+    return [0, null]
+}
 
-export const tokenizeString = (input: string, current: number): Token => {}
+export const tokenizeString = (input: string, current: number): Token => {
+    return [0, null]
+}
 
-const skipWhiteSpace = (input: string, current: number): Token => {}
+export const skipWhiteSpace = (input: string, current: number): Token => {
+    return [0, null]
+}
 
 const tokenizers: Array<TokenizerFunc> = [
     skipWhiteSpace,
