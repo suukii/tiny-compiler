@@ -12,6 +12,10 @@
 -   `StringLiteral`
 -   `CallExpression`
 
+**我们的任务是，阅读以下内容，并实现  `src/index.ts`  中定义的所有函数，然后通过  `npm test`  来测试你的代码。**
+
+p.s.  使用  `npm run dev`  会监控  `src/index.ts`  的变化并重新执行该文件。
+
 ## 任务 1: parseNumber
 
 `parseNumber` 接收一个数字 token 并将它转换成类型为 `NumberLiteral` 的 AST 节点，这个函数已经写好了。
@@ -139,3 +143,11 @@ const parseProgram = (tokens: Array<Token>): Ast => {
     return ast
 }
 ```
+
+##  小结
+
+好了，任务就这么多，现在去  `src/index.ts`  文件中完成你的任务吧。
+
+你可以执行  `npm run dev`  命令，然后在  `src/index.ts`  中使用  `console.log`  来进行调试，或者也可以使用  Quokka.js  之类的。
+
+完成之后可以通过  `npm test`  来检查你的实现是否符合要求。
