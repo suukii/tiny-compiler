@@ -1,33 +1,35 @@
 # 写一个超迷你的编译器 - #1 词法分析器 tokenizer
 
-这个超迷你词法分析器的任务就是：将输入的 `代码字符串` 转换成一系列 `token` 之后输出。它只能处理 3 种简单的 token:
+在这一节我们要写一个超迷你的词法分析器，这个词法分析器的任务就是：将输入的 `代码字符串` 转换成一系列 `token` 之后输出。它只要处理 3 种简单的 token 就行:
 
 -   单个字符: `(` 和 `)`
--   多个字符: `name` 或者 `12`
--   字符串: 包裹在双引号 `"` 之间的内容
+-   多个字符: 比如 `name` 或者 `12`
+-   字符串: 包裹在双引号 `"` 之间的内容，`"hello"`
 
 输出的 token 格式：
 
-```js
-;[
-    5,
+```ts
+type TokenPos = [
+    number,
     {
-        type: 'string',
-        value: 'hello',
+        type: string
+        value: string
     },
 ]
 ```
 
-数组第 1 项是 token 的长度，第 2 项是 token 的详细信息，包括 `类型` 和 `值`。
+数组第 1 项是 token 的长度，第 2 项是 token 的详细信息，包括 `type`(类型) 和 `value`(值)。
 
 token 的类型包括：
 
--   `paren`: 括号，只包括 `(` 和 `)`
--   `string`: 字符串，用双引号包裹起来的内容，不考虑转义字符
--   `number`: 数字
--   `name`: 标识符，只能使用 `[a-zA-Z]` 字符
+-   `paren`: 括号，只包括 `(` 和 `)`。
+-   `string`: 字符串，用双引号包裹起来的内容，不考虑转义字符。
+-   `number`: 数字，`[0-9]`。
+-   `name`: 标识符，只能使用 `[a-zA-Z]` 字符。
 
-我们的任务是，阅读以下任务说明并实现 `src/index.ts` 文件中定义的所有函数，通过 `npm test` 测试代码。
+**我们的任务是，阅读以下内容，并实现 `src/index.ts` 中定义的所有函数，通过 `npm test` 来测试你的代码。**
+
+p.s. 使用 `npm run dev` 会监控 `src/index.ts` 的变化并重新执行该文件。
 
 ## 任务 1: 分析单个字符
 
@@ -157,3 +159,11 @@ const tokenizer = input => {
 说明：
 
 `tokenizer` 的任务就是接收一个代码字符串 `input`，在 `input` 上尝试所有 token 分析器，如果有 token 生成，就 push 到 tokens 数组中，在 `input` 分析结束后返回。如果试过所有分析器都无法生成合法的 token，那就抛出错误。
+
+## 小结
+
+好啦，任务就这么多，现在去 `src/index.ts` 文件中完成你的任务吧。
+
+你可以执行 `npm run dev` 命令，然后在 `src/index.ts` 中使用 `console.log` 来进行调试，或者也可以使用 Quokka.js 之类的。
+
+完成之后可以通过 `npm test` 来检查你的实现是否符合要求。
