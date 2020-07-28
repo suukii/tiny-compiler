@@ -49,6 +49,9 @@ export const parseExpression = (
 ): [number, ExpressionAstNode] => {
     let token: Token = tokens[++current]
 
+    if (!token || token.type !== 'name')
+        throw new TypeError('invalid expression met')
+
     const node: ExpressionAstNode = {
         type: 'CallExpression',
         name: token.value,

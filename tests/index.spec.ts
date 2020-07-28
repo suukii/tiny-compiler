@@ -81,6 +81,34 @@ describe('Parse Expression', () => {
         ])
     })
 
+    test('It should throw error if met with invalid expressions.', () => {
+        const tokens = [
+            {
+                type: 'paren',
+                value: '(',
+            },
+            {
+                type: 'name',
+                value: 'add',
+            },
+            {
+                type: 'number',
+                value: '1',
+            },
+            {
+                type: 'number',
+                value: '2',
+            },
+            {
+                type: 'paren',
+                value: '(',
+            },
+        ]
+        expect(() => parseExpression(tokens, 0)).toThrowError(
+            'invalid expression met',
+        )
+    })
+
     test('It should be able to parse nested expressions.', () => {
         const tokens = [
             {
