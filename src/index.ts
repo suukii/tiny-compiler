@@ -1,13 +1,12 @@
-type Token = [
-    number,
-    {
-        type: string
-        value: string
-    } | null,
-]
+interface Token {
+    type: string
+    value: string
+}
+
+type TokenPos = [number, Token | null]
 
 interface TokenizerFunc {
-    (input: string, current: number): Token
+    (input: string, current: number): TokenPos
 }
 
 const tokenizeCharacter = (
@@ -15,15 +14,18 @@ const tokenizeCharacter = (
     value: string,
     input: string,
     current: number,
-): Token => {
+): TokenPos => {
     return [0, null]
 }
 
-export const tokenizeParenOpen = (input: string, current: number): Token => {
+export const tokenizeParenOpen = (input: string, current: number): TokenPos => {
     return [1, { type: 'paren', value: '(' }]
 }
 
-export const tokenizeParenClose = (input: string, current: number): Token => {
+export const tokenizeParenClose = (
+    input: string,
+    current: number,
+): TokenPos => {
     return [1, { type: 'paren', value: ')' }]
 }
 
@@ -32,23 +34,23 @@ const tokenizePattern = (
     pattern: RegExp,
     input: string,
     current: number,
-): Token => {
+): TokenPos => {
     return [0, null]
 }
 
-export const tokenizeNumber = (input: string, current: number): Token => {
+export const tokenizeNumber = (input: string, current: number): TokenPos => {
     return [0, null]
 }
 
-export const tokenizeName = (input: string, current: number): Token => {
+export const tokenizeName = (input: string, current: number): TokenPos => {
     return [0, null]
 }
 
-export const tokenizeString = (input: string, current: number): Token => {
+export const tokenizeString = (input: string, current: number): TokenPos => {
     return [0, null]
 }
 
-export const skipWhiteSpace = (input: string, current: number): Token => {
+export const skipWhiteSpace = (input: string, current: number): TokenPos => {
     return [0, null]
 }
 
